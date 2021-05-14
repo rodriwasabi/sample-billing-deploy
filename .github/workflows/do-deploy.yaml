@@ -27,5 +27,5 @@ jobs:
     - uses: azure/k8s-deploy@v1
       with:
         manifests: |
-          app-deploy/deployment.yml
-          app-deploy/service.yml
+          ../../app-deploy/deployment.yml
+          ../../app-deploy/service.yml
