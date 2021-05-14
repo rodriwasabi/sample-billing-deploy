@@ -1,9 +1,10 @@
 name: deploy
 
 on:
-  repository_dispatch:
-    types: [deploy]
-  workflow_dispatch:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v.*'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
