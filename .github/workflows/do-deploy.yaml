@@ -1,0 +1,30 @@
+name: deploy
+
+on:
+  repository_dispatch:
+    types: [deploy]
+  workflow_dispatch:
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  CLUSTER_NAME: samplek8s
+  CLUSTER_RESOURCE_GROUP: azure-samplek8s
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+
+  # Set the target Azure Kubernetes Service (AKS) cluster. 
+    - uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
+    - uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          app-deploy/deployment.yml
+          app-deploy/service.yml
