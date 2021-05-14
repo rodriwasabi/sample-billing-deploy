@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sample-billing
+  name: sample-billing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-billing
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: sample-billing
+    spec:
+      containers:
+      - image: rodrigocaballerohurtado/sample-billing:latest
+        name: sample-billing
+        resources: {}
+status: {}

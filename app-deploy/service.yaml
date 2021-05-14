@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sample-billing
+  name: sample-billing
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer
+  loadBalancerIP: 168.61.175.0
+  selector:
+    app: sample-billing
+status:
+  loadBalancer: {}
